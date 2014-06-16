@@ -3,7 +3,7 @@
  * -------------------
  * Button based toggle button for jQuery
  * 
- * @version 0.1.0 (2014/06/16 18:00)
+ * @version 0.1.1 (2014/06/16 18:48)
  * @author mach3 <http://github.com/mach3>
  * @license MIT
  * @require jQuery
@@ -18,6 +18,7 @@
 		 * - {String} group : data-* attribute key for group
 		 * - {String} eventChange : Event name triggered when changed
 		 * - {String} eventActive : Event name triggered when activated
+		 * - {Integer} selectable : Selectable number
 		 * - {Boolean} radio : Enable or disable radio mode
 		 */
 		toggleButtonDefaults: {
@@ -25,7 +26,8 @@
 			group: "toggleGroup",
 			eventChange: "toggle.change",
 			eventActive: "toggle.active",
-			radio: true 
+			selectable: 0,
+			radio: true
 		},
 
 		/**
@@ -68,7 +70,7 @@
 				return $.getToggleGroup(group, node.get(0).nodeName);
 			}
 
-			return null;
+			return [];
 		},
 
 		/**
@@ -85,7 +87,7 @@
 			group = this.getGroup(options);
 			data = [];
 
-			if(group){
+			if(group.length){
 				group.filter("." + options.name).each(function(){
 					data.push(this.value);
 				});
@@ -107,25 +109,28 @@
 			my.options = $.extend({}, $.toggleButtonDefaults, options);
 
 			my.toggle = function(node, active){
-				var o, _active;
+				var o, _active, changeTo;
 
 				o = my.options;
 				_active = node.hasClass(o.name);
+				changeTo = ($.type(active) === "boolean") ? active : ! _active;
 
-				if(o.radio && active === void 0 && _active){
-					return;
+				switch(true){
+					case (o.radio && active === void 0 && _active):
+					case (changeTo && ! o.radio && o.selectable && o.selectable <= node.serializeGroup().length):
+						return;
+					default: break;
 				}
 
-				active = ($.type(active) === "boolean") ? active : ! _active;
-				node.toggleClass(o.name, active);
+				node.toggleClass(o.name, changeTo);
 
-				if(_active !== active){
-					node.trigger(o.eventChange, active);
-					if(active){
+				if(_active !== changeTo){
+					node.trigger(o.eventChange, changeTo);
+					if(changeTo){
 						node.trigger(o.eventActive);
 					}
 				}
-				return active;
+				return changeTo;
 			};
 
 			my.handler = function(e){

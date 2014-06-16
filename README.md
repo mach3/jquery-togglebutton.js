@@ -32,11 +32,14 @@ If `radio` option is `TRUE`, this behave like input[type=radio], otherwise, like
 
 Default settings are in `$.toggleButtonDefaults`.
 
-- **name** :String ... CSS class name for activated button
-- **group** :String ... data-* attribute's key for toggle button group
-- **eventChange** :String ... Event name triggered when changed
-- **eventActive** :String ... Event name triggered when activated
-- **radio** :Boolean ... Radio mode
+- **name** :String ("active") ... CSS class name for activated button
+- **group** :String ("toggleGroup") ... data-* attribute's key for toggle button group
+- **eventChange** :String ("toggle.change") ... Event name triggered when changed
+- **eventActive** :String ("toggle.active") ... Event name triggered when activated
+- **selectable** :Integer (0) ... Selectable number
+- **radio** :Boolean (true) ... Radio mode
+
+If `selectable` is `0`, selectable number is not to be limited.
 
 ## Methods
 

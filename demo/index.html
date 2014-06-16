@@ -59,7 +59,7 @@
 		</section>
 
 		<section>
-			<h1>Grouped</h1>
+			<h1>Grouped (2 buttons selectable)</h1>
 			<p>
 				<button class="demo-02" data-toggle-group="demo-02" value="foo">foo</button>
 				<button class="demo-02" data-toggle-group="demo-02" value="bar">bar</button>
@@ -67,7 +67,7 @@
 			</p>
 			<ul class="log demo-01-log"></ul>
 			<script>
-			$(".demo-02").toggleButton({radio: false})
+			$(".demo-02").toggleButton({radio: false, selectable: 2})
 			.on("toggle.change", function(e, active){
 				log(".demo-01-log", JSON.stringify($(this).serializeGroup()));
 			});
@@ -88,8 +88,8 @@
 				log(".demo-02-log", JSON.stringify($(this).serializeGroup()));
 			});
 			</script>
-			
 		</section>
+
 	</article>
 	
 </body>
