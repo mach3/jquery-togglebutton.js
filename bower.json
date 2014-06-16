@@ -1,0 +1,28 @@
+{
+  "name": "jquery-togglebutton",
+  "version": "0.1.0",
+  "authors": [
+    "mach3 <http://github.com/mach3>"
+  ],
+  "description": "Button based toggle button",
+  "main": "dist/togglebutton.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jquery",
+    "toggle",
+    "button"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1"
+  }
+}

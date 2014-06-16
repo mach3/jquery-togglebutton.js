@@ -1,0 +1,24 @@
+{
+  "name": "jquery-togglebutton",
+  "version": "0.1.0",
+  "description": "Button based toggle button for jQuery",
+  "main": "dist/togglebutton.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mach3/jquery-togglebutton.js"
+  },
+  "keywords": [
+    "jquery",
+    "toggle",
+    "button"
+  ],
+  "author": "mach3 <http://github.com/mach3>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mach3/jquery-togglebutton.js/issues"
+  },
+  "homepage": "https://github.com/mach3/jquery-togglebutton.js"
+}
