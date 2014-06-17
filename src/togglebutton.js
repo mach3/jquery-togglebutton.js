@@ -108,19 +108,19 @@
 				switch(true){
 					case (o.radio && active === void 0 && _active):
 					case (changeTo && ! o.radio && o.selectable && o.selectable <= node.serializeGroup().length):
-						return;
-					default: break;
+						return {
+							changed: false,
+							active: _active
+						}
+					default:
+						node.toggleClass(o.name, changeTo);
+						return {
+							changed: _active !== changeTo,
+							active: changeTo
+						};
 				}
 
-				node.toggleClass(o.name, changeTo);
-
-				if(_active !== changeTo){
-					node.trigger(o.eventChange, changeTo);
-					if(changeTo){
-						node.trigger(o.eventActive);
-					}
-				}
-				return changeTo;
+				return null;
 			};
 
 			my.handler = function(e){
@@ -131,12 +131,19 @@
 				node = $(el);
 				group = node.data(o.group);
 
-				if(my.toggle(node) && !! group && o.radio){
+				toggle = my.toggle(node);
+
+				if(toggle.active && !! group && o.radio){
 					$.getToggleGroup(group, el.nodeName).each(function(){
 						if(el !== this){
 							my.toggle($(this), false);
 						}
 					});
+				}
+
+				if(toggle.changed){
+					node.trigger(o.eventChange, toggle.active);
+					toggle.active && node.trigger(o.eventActive);
 				}
 			};
 
